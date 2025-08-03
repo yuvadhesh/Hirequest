@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hirequest</title>
+</head>
+<body>
+    <section class="upload-section">
+  <div class="upload-card">
+    <div class="upload-icon">📄</div>
+    <h2>Upload Your Resume</h2>
+    <p>Only PDF files are allowed (max size: 5MB)</p>
+    
+    <form id="resumeForm">
+      <label for="resumeInput" class="upload-label">Choose PDF File</label>
+      <input type="file" id="resumeInput" accept=".pdf" />
+      <p class="file-name" id="fileName">No file selected</p>
+      <button type="submit" class="upload-btn">Upload</button>
+    </form>
+
+    <p class="success-message" id="successMessage"></p>
+  </div>
+</section><script>
+    const resumeInput = document.getElementById("resumeInput");
+const fileNameDisplay = document.getElementById("fileName");
+const resumeForm = document.getElementById("resumeForm");
+const successMessage = document.getElementById("successMessage");
+
+resumeInput.addEventListener("change", () => {
+  const file = resumeInput.files[0];
+  if (file && file.type === "application/pdf") {
+    fileNameDisplay.textContent = `Selected: ${file.name}`;
+  } else {
+    fileNameDisplay.textContent = "Please select a valid PDF file.";
+    resumeInput.value = "";
+  }
+});
+
+resumeForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const file = resumeInput.files[0];
+  if (!file) {
+    alert("Please choose a file before uploading.");
+    return;
+  }
+
+  // Simulate upload success
+  successMessage.textContent = "✅ Resume uploaded successfully!";
+});
+
+</script>
+</body>
+</html>
